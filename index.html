@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tennis Visualizations</title>
+
+    <!-- Libraries -->
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://d3js.org/d3.v4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.js"></script>
+
+    <!-- Custom files -->
+    <link rel="stylesheet" href="css/main.css" />
+
+    <!-- your script file -->
+    <script src="js/main.js"></script>
+</head>
+
+<body class="container">
+
+    <h1 class-"center-align grey-text lighten-2">Assignment 2</h1>
+    <hr>
+    <h2> Australian Open 2014</h2>
+    <h3>First Serve Percentage, and Unforced Errors to win rate.</h3>
+    <br>
+    <!--<div class="btn-group" data-toggle="buttons">-->
+    <div class="btn-group-vertical" data-toggle="buttons">
+        <label class="btn btn-primary">
+				<input value="1" class="round" type="radio" name="options" id="round1" autocomplete="off" checked>Round 1
+		</label> 
+        <label class="btn btn-primary">
+				<input value="2" class="round" type="radio" name="options" id="round2" autocomplete="off">Round 2
+		</label>
+        <label class="btn btn-primary">
+				<input value="3" class="round" type="radio" name="options" id="round3" autocomplete="off">Round 3
+		</label>
+         <label class="btn btn-primary">
+				<input value="4" class="round" type="radio" name="options" id="round4" autocomplete="off">Round 4
+		</label>
+        <label class="btn btn-primary">
+				<input value="5" class="round" type="radio" name="options" id="round5" autocomplete="off">Quarter-Final
+		</label>
+        <label class="btn btn-primary">
+				<input value="6" class="round" type="radio" name="options" id="round6" autocomplete="off">Semi-Final
+		</label>
+         <label class="btn btn-primary">
+				<input value="7" class="round" type="radio" name="options" id="round7" autocomplete="off">Final
+		</label>
+    </div>
+    <div class="btn-group-vertical" data-toggle="buttons">
+        <label class="btn btn-primary">
+				<input value="M" class="gender" type="radio" name="options" id="male" autocomplete="off" checked >Men
+			</label>
+        <label class="btn btn-primary ">
+				<input value="F" class="gender" type="radio" name="options" id="female" autocomplete="off" >Women
+		    </label>
+    </div>
+     <div class="btn-group-vertical">
+        <label class="btn btn-primary" data-toggle="buttons">
+				<input value="FSP" class="first" type="radio" name="options" id="FSP" autocomplete="off" checked >First Serve Percentage
+			</label>
+        <label class="btn btn-primary ">
+				<input value="UFE" class="unforced" type="radio" name="options" id="UFE" autocomplete="off" >Unforced Error
+		    </label>
+    </div>
+    <div id="vis"></div>
+    <hr>
+   
+
+    <div id="content" class="container center-align">
+      <h1 class="explanation left-align"> 
+      <u>Explanations:</u>
+    </h1>
+    <br>
+
+             <!--On your webpage, you must provide a
+         detailed defense of your choice of visual encodings and control features.
+          For your visual layout, describe why it is an optimal choice for expressing
+           your data effectively (~ 1 paragraph). Then, for each controlling element,
+            detail how it enables your user to ask different questions (~1 paragraph). 
+            You should include specific examples of insights you discovered through the
+             use of these tools. -->
+        <h3 class="explanation left-align">
+        Visual Layout Selection:
+      </h3>
+      <p class="explanation left-align">
+        <b>Using a bar chart:</b> A bar chart was optimal in displaying my data set because it allows
+        for the easy comparison between two different values. One reaons that I leveraged a bar chart instead
+        of a scatter plot in order to show my data was because I the bars connecting to the x-axis allowed for the 
+        names of the matches to be more easily read and connected. With the match names being pretty long, there needed 
+        to be more spacing between the text and the axis, this made it difficult to see what data points related to which 
+        x-value. Another reason in utilizing the bar chart was that the x-axis was mainly the same, with only match names changing.
+        Because of this, the y-axis is what contained most of the moving data. 
+      </p>
+      <h3 class="explanation left-align">
+        Visual Encodings:
+      </h3>
+      <p class="explanation left-align">
+             <b>Position:</b> Position is one of the strongest visual encodings. I utilized a common scale 
+             in order to allow for quick comparisons between bars. Because the data was not sorted, 
+             I utilized this common scale in order to allow viewers to quickly compare the tops of each bar with each other.
+             The bars allow for easily checking if one statistic is higher than another 
+      </p>
+      <p class="explanation left-align">
+             <b>Text Labels:</b> Because bar charts make it difficult to discern exact numbers, I added hover
+             text that allows a viewer to see not only the number that is displayed, but also the opponent that 
+             is being played against. This hover text contains the exact number shown in the graph, and allows for
+             the viewer to be able to compare it to the other bars on the graph, as well as the opponent. 
+    </p>
+      <p class="explanation left-align">
+             <b>Color:</b> In order to encode who won or lost a match, the bars are color-coded in green and red to show a win or loss
+             respectively. The color of the bar corresponds to the first player in the match listed on the x axis. 
+
+    <h3 class="explanation left-align">
+        Control Features: 
+    </h3>
+    <p class="explanation left-align">
+             The three groups of buttons are rounds, gender, and match statistics. I utilized radio buttons for the control features,
+              because the visualization aims at providing information based on the combinations of these groups without crowding the dataset.
+              If every single round could be shown, there would not only be an unreadable amount of bars on the chart, but also redundant names that 
+              could confuse the viewer. 
+    </p>
+    <p class="explanation left-align">
+             The first group of buttons is the rounds. Rounds are used to see the progression of the tournament, as well as to see if players 
+             continue to progress through the tournaments with lower serve percentages and higher unforced errors. Being able to see the whole progression
+             of a tournament allows for viewers to go through the tournament and explore how the trends throughout the tournament is. Furthermore, a 
+             viewer is able to see if a tennis player continues to serve well throughout a tournament or has difficulty being consistent. 
+
+             A question that I had when I was creating this dataset is do later rounds in a match have higher serve percentages or lower unforced errors 
+             because of the assumed increase in skill level? Through exploring my visualization, I was able to discern that later rounds do not have necessarily
+             higher server percentages or lower unforced errors. This could be due to many factors, such as already higher skill level equating to more errors, or
+             potentially feeling more pressured to perform as the tournament progresses. These questions can continue to be explored through expanding on this
+             visualization. 
+    </p>
+       <p class="explanation left-align">
+             The second group of buttons is the gender. Gender is used to view between the men's bracket and the women's bracket. It is there
+             to offer more insight about the tournament as a whole. Viewers may be curious as to if there are significant trends between men's 
+             and women's tennis. Being able to compare these two groups allows for more comparisons. 
+
+             A question that I had when working with this group of buttons is if women have a lower unforced error rate. Typically in tennis, women's rallies are much 
+             longer. I was wondering if these longer rallies would correlate to less unforced erros. Through reviewing the visualization that women did seem to have a 
+             smaller number of unforced errors. More research needs to be done, but I was excited to see how my visualization had helped been a step in answering this question.
+    </p>
+       <p class="explanation left-align">
+             The third group of buttons is the first serve percentage and the number of unforced errors. This group of buttons allows for the most questions to be asked.
+             They are there to help viewers gain insight into how these two categories can affect a win or loss. Typically in tennis, the higher the first serve percentage
+             the better the chance of winning. This is because the serve is the only shot in the game where a player has full control of the point. It is usual seen that
+             the higher the first serve percentage the higher chance for winning. Unforced errors are mistakes that players make. These mistakes often can happen due to pressure 
+             or carelessness. The higher amount of unfored errors usually correlate to a higher chance of losing. 
+
+             A question that I had when I was creating this dataset is whether there is a trend for higher serve percentage winning a game. Though I had always
+             heard that the better you serve the higher chance you would win, I never had much data to back it up. This data showed that as a whole this was true. However
+             I found it interesting that in the Men's Final between Rafael Nadal and Stan Wawrinka, that Nadal both served better and had less unforced erros, yet still lost. 
+             This was an outlier that I had found compared to the common trend to the win/loss rate.
+    </p>
+       
+    </div>
+
+
+</body>
+
+</html>
